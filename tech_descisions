@@ -1,10 +1,10 @@
 disadvantages of Entities.ForEach:
   - doesn't support generics in parameters
   - doesn't work inside a lambda
-  - doesn't support nested structs in lambda parameters (good for tasks)
-  - can't write extensions (ForEachLambdaJobDescription)
-  - doesn't support TryGetComponent, or any other extension of the base class (can be alleviated with passing ComponentDataForEntity)
-  - can't use batch_i for ECB, have to recreate ecb for each entity
+  * doesn't support nested structs in lambda parameters (good for tasks)
+  * can't write extensions (ForEachLambdaJobDescription)
+  * doesn't support TryGetComponent, or any other extension of the base class (can be alleviated with passing ComponentDataForEntity)
+  * can't use batch_i for ECB, have to recreate ecb for each entity
 
 disadvantages of IJobEntityBatch:
   - has to specify a separate struct

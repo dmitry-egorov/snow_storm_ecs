@@ -1,7 +1,7 @@
 Todo:
 - git
-- add read contexts everywhere
-- task excution on a separate entity? (maybe the one where it is referenced on stack)
+- task execution on a separate entity? (maybe the one where it is referenced on stack)
+  - can store prev_task and fallback_task and traverse the tasks without a stack
 - Entities.Foreach needs task components query?
 - how to combine task context in batch jobs?
 - finish_with and fail_with when pushing tasks, task execution context
@@ -17,15 +17,12 @@ Todo:
 - sync log position to the carrier (not just in space), and don't interpolate
 - specify time remaining when setting the location directly to correctly interpolate stopping
   - remove time remaining when assigning prev_location
-
-
+- wind up time for actions
 
 Later:
-- wind up time for actions
 - storage capacity
 - approach task: min and max range
 - update and dispose spatial map in a single system at the end of gameplay frame
-
 
 Much later:
 - single write resource sharing and disposing code
@@ -38,6 +35,7 @@ Much later:
 
 
 Done:
++ add read contexts everywhere
 + replace entity<..> with shape<entity,..>
 + don't store sort_key?
 

@@ -5,6 +5,7 @@ clips/
 **/.vs/
 **/obj/
 **/bin/
+**/Logs/
 
 .DS_Store
 ._.DS_Store
