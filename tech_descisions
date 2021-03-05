@@ -1,0 +1,30 @@
+disadvantages of Entities.ForEach:
+  - doesn't support generics in parameters
+  - doesn't work inside a lambda
+  - doesn't support nested structs in lambda parameters (good for tasks)
+  - can't write extensions (ForEachLambdaJobDescription)
+  - doesn't support TryGetComponent, or any other extension of the base class (can be alleviated with passing ComponentDataForEntity)
+  - can't use batch_i for ECB, have to recreate ecb for each entity
+
+disadvantages of IJobEntityBatch:
+  - has to specify a separate struct
+  - slightly more verbose initialisation
+  
+why use has<buffer_element>?
+  - AddBuffer removes current elements if the buffer exists, append doesn't append if there's no buffer
+  
+  
+requirements for gameplay systems:
+- need a way to include data for tasks automagically
+- need to do try_gets
+- need to create ecb, task structs without much cost
+
+
+events:
+- events as entity component arrays
+- events as entities
+	- no order
+	- polymorphism and code sharing
+	- random entity access
++ events as entities + event queue on the target
+- global event queue

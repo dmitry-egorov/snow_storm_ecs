@@ -1,0 +1,72 @@
+Todo:
+- git
+- add read contexts everywhere
+- task excution on a separate entity? (maybe the one where it is referenced on stack)
+- Entities.Foreach needs task components query?
+- how to combine task context in batch jobs?
+- finish_with and fail_with when pushing tasks, task execution context
+- think of replacing "in data" with componentTypeHandle in Entities.ForEach
+- is_being_cut_down => setup cutting down on a tree before applying cuts to it
+    - send is_finished_cutting to the cutter
+    - also add cut direction to is_being_cut_down
+- gather planning?
+- spawn trees
+- add anchor to put carried entity's visual
+- merge carry and store -> hold (pass task instead of store)
+- don't interpolate, when target hasn't moved
+- sync log position to the carrier (not just in space), and don't interpolate
+- specify time remaining when setting the location directly to correctly interpolate stopping
+  - remove time remaining when assigning prev_location
+
+
+
+Later:
+- wind up time for actions
+- storage capacity
+- approach task: min and max range
+- update and dispose spatial map in a single system at the end of gameplay frame
+
+
+Much later:
+- single write resource sharing and disposing code
+- think of ai parallel tasks or interruptions
+	- push extra tasks on emergencies? -1 source meaning it just pops the next task from the stack when failed (as well as when finished, but that's by default)
+	^ alternatively just purge the stack when pushing emergency tasks?
+- Job.WithCode to work on chunks?
+- optimize standard translation components and systems? 
+
+
+
+Done:
++ replace entity<..> with shape<entity,..>
++ don't store sort_key?
+
++ global reading TaskEntityContext
++ entity ecb
++ new entity struct?
++ generic job input
++ make hash_map temporary and have exact number of entities
++ store the log
++ find a tree to gather
++ repeat
++ carry
+	+ ...
+	+ sync position of carried entity to the carrier's
++ use batch_index for sort key!
++ request ECB directly when creating a job (get_end_ecb in general system, get_comm_ecb in precomm)
++ TaskContext. Try to get the necessary parameters without having it in the query, from within the context methods.
++ destroy in bulk (in cutting down and in assign task)
++ transform to job code?
+    + task to job code:
+        + get_task_query
+		+ get_task_types
+		+ get_task_data
+	+ finish all tasks in base class
++ gameplay system context + comm context
++ search for entity in neighbourhood
+    + need to use custom search structure for in_space component
++ implement component copying
++ add a copying system for each task
++ implement chop down as a task
++ implement task failure (requires storing source tasks)
++ fixed frame rate simulation + presentation interpolation

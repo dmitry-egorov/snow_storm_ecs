@@ -1,0 +1,40 @@
+* make entities hierarchial, i.e. reference other entities.
+*? cooldowns: separate entity, with a reference back to the source. A system marks the source when cooldown is complete.
+
+
+flow path finding:
+* flow map: save flow map for each destination
+
+local path finding:
+* save milestones (buildings, natural objects, someting permanent) and their positions
+* remember dead ends/inaccessible areas (walkarounds) and how to circumvent them
+* ask for paths
+* follow a leader if he goes to the destination
+* prefer to walk on roads
+
+
+* Giant steam/fusion engine travels through the planet: clears obstacles, builds cities, taking best people for the job further.
+* Distribute power, people and heat among buildings.
+* Bio-engineers and mech engineers: distinction based on learned skills.
+* characters on special posts (piloting, engineering)
+* Clear obstacles by first designing a solution
+* Mostly stationary, but some in-motion missions.
+* science is one of the most important resources provided by the cities built. The knowledge is transmitted through the rail
+* people work on schedule only, gathering together before doing actual work
+* missions:
+  * produce fuel
+  * clear obstacle
+  * build city?
+  * upgrade the engine
+  * find people/heroes
+  * build bridges/other structures
+  
+ai:
+* volunteer for jobs, when nothing to do.
+* keep track of running average needs to find a volunteer job (if hungree a lot -> make food)
+* can build on their own, when needs are not met a lot
+* area is dangerous -- can cancel tasks within it
+* recent events queue
+
+
+

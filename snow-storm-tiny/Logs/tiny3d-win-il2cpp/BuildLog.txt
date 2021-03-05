@@ -1,0 +1,7 @@
+[             ] Require frontend run.  artifacts/tundra_tiny3d-win-il2cpp_zo7.dag.json does not exist yet
+*** buildprogram build success (0.02 seconds), 0 items updated, 13 evaluated
+[      29s] Executed build program. Created build graph with 1332 nodes.
+[           0s] Freezing tundra_tiny3d-win-il2cpp_zo7.dag.json into .dag (.dag file didn't exist)
+tundra: error: unable to map tiny3d-win-il2cpp to any named node or input/output file
+maybe you meant:
+- tiny3d-mac-il2cpp

@@ -1,0 +1,18 @@
+wound
+{
+	damage
+	regeneration_reqired
+}
+
+
+
+health
+{
+	amount
+}
+
+
+- regeneration is applied to all wounds equaly
+- a wound is removed when its regeneration_required is 0
+- all wounds apply their damage
+- the damage is changed while the wound is healed
