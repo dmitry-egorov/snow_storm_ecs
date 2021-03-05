@@ -3,7 +3,6 @@ using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 using static Game.Mechanics.CoreShapes;
-using static Game.Mechanics.CoreIndex;
 using static Game.Mechanics.CoreJobs;
 
 namespace Game.Mechanics
@@ -213,17 +212,18 @@ namespace Game.Mechanics
             return false;
         }
         
-        public static Exclude<T> not<T>(ComponentDataFromEntity<T> data) where T : struct, IComponentData => new Exclude<T> {type = data};
+        public static Exclude<T> not<T>(ComponentDataFromEntity<T> data) where T : struct, IComponentData => new Exclude<T>(data);
 
-        public struct Exclude<T> 
+        public readonly struct Exclude<T> 
             where T : struct, IComponentData
         {
-            public ComponentDataFromEntity<T> type;
+            public readonly ComponentDataFromEntity<T> type;
+            public Exclude(ComponentDataFromEntity<T> type) => this.type = type;
 
             public static implicit operator ComponentDataFromEntity<T>(Exclude<T> e) => e.type;
         }
 
-        public struct n<T> { }
+        public readonly struct n<T> { }
 
         public static bool doesnt_have<T>(this Entity e, ComponentDataFromEntity<T> data, out T value)
             where T : struct, IComponentData =>

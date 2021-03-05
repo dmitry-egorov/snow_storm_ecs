@@ -1,5 +1,4 @@
 using Unity.Entities;
-using static Game.Mechanics.CoreShapes;
 using static Game.Mechanics.CoreIndex;
 using static Unity.Entities.EntityCommandBuffer;
 
@@ -7,7 +6,7 @@ namespace Game.Mechanics
 {
     public static class CoreEcb
     {
-        public struct has<T>: IComponentData where T: struct, IBufferElementData
+        public readonly struct has<T>: IComponentData where T: struct, IBufferElementData
         {
         }
          

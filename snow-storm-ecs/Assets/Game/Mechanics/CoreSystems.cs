@@ -109,68 +109,68 @@ namespace Game.Mechanics
             protected void set<T>(out ComponentDataFromEntity<T> d, bool write = false) where T : struct, IComponentData => d = GetComponentDataFromEntity<T>(!write);
             protected void set<T>(out BufferFromEntity<T> d, bool write = false) where T : struct, IBufferElementData => d = GetBufferFromEntity<T>(!write);
             
-            protected void set(out EntityRead h) => h = new EntityRead {type = GetEntityTypeHandle() };
+            protected void set(out EntityRead h) => h = new EntityRead (GetEntityTypeHandle());
 
             protected void set<T1>(out Optional<T1> jri)
                 where T1 : struct, IComponentData 
                 => jri = new Optional<T1>
-                {
-                    type1 = get_handle<T1>(),
-                };
+                (
+                    get_handle<T1>()
+                );
             
             protected void set<T1>(out Read<T1> jri)
                 where T1 : struct, IComponentData 
             => jri = new Read<T1>
-            {
-                type1 = get_handle<T1>(),
-            };
+            (
+                get_handle<T1>()
+            );
             
             protected void set<T1, T2>(out Read<T1, T2> jri)
                 where T1 : struct, IComponentData 
                 where T2 : struct, IComponentData
             => jri = new Read<T1, T2>
-            {
-                type1 = get_handle<T1>(),
-                type2 = get_handle<T2>(),
-            };
+            (
+                get_handle<T1>(),
+                get_handle<T2>()
+            );
             
             protected void set<T1, T2, T3>(out Read<T1, T2, T3> jri)
                 where T1 : struct, IComponentData 
                 where T2 : struct, IComponentData
                 where T3 : struct, IComponentData 
             => jri = new Read<T1, T2, T3>
-            {
-                type1 = get_handle<T1>(),
-                type2 = get_handle<T2>(),
-                type3 = get_handle<T3>(),
-            };
+            (
+                get_handle<T1>(),
+                get_handle<T2>(),
+                get_handle<T3>()
+            );
             
             protected GlobalRead<T1> get_global<T1>()
                 where T1 : struct, IComponentData 
             => new GlobalRead<T1>
-            {
-                type = get_type<T1>(),
-            };
+            (
+                get_type<T1>()
+            );
             
             protected GlobalRead<T1, T2> get_global<T1, T2>()
                 where T1 : struct, IComponentData 
                 where T2 : struct, IComponentData
             => new GlobalRead<T1, T2>
-            {
-                type1 = get_type<T1>(),
-                type2 = get_type<T2>(),
-            };
+            (
+                get_type<T1>(),
+                get_type<T2>()
+            );
             
             protected GlobalRead<T1, T2, T3> get_global<T1, T2, T3>()
                 where T1 : struct, IComponentData 
                 where T2 : struct, IComponentData
                 where T3 : struct, IComponentData 
             => new GlobalRead<T1, T2, T3>
-            {
-                type1 = get_type<T1>(),
-                type2 = get_type<T2>(),
-                type3 = get_type<T3>()
-            };
+            (
+                get_type<T1>(),
+                get_type<T2>(),
+                get_type<T3>()
+            );
             
             protected GlobalRead<T1, T2, T3, T4> get_global<T1, T2, T3, T4>()
                 where T1 : struct, IComponentData 
@@ -178,12 +178,12 @@ namespace Game.Mechanics
                 where T3 : struct, IComponentData 
                 where T4 : struct, IComponentData 
             => new GlobalRead<T1, T2, T3, T4>
-            {
-                type1 = get_type<T1>(),
-                type2 = get_type<T2>(),
-                type3 = get_type<T3>(),
-                type4 = get_type<T4>()
-            };
+            (
+                get_type<T1>(),
+                get_type<T2>(),
+                get_type<T3>(),
+                get_type<T4>()
+            );
 
             protected void set<T1>(out GlobalRead<T1> jri)
                 where T1 : struct, IComponentData
@@ -203,34 +203,34 @@ namespace Game.Mechanics
             protected void set<T1>(out Write<T1> jri)
                 where T1 : struct, IComponentData 
                 => jri = new Write<T1>
-                {
-                    type1 = get_handle<T1>(true),
-                };
+                (
+                    get_handle<T1>(true)
+                );
             
             protected void set<T1, T2>(out Write<T1, T2> jri)
                 where T1 : struct, IComponentData 
                 where T2 : struct, IComponentData 
                 => jri = new Write<T1, T2>
-                {
-                    type1 = get_handle<T1>(true),
-                    type2 = get_handle<T2>(true),
-                };
+                (
+                    get_handle<T1>(true),
+                    get_handle<T2>(true)
+                );
             
             protected void set<T1>(out BufferWrite<T1> jri)
                 where T1 : struct, IBufferElementData 
                 => jri = new BufferWrite<T1>
-                {
-                    type1 = get_buffer_handle<T1>(true),
-                };
+                (
+                    get_buffer_handle<T1>(true)
+                );
             
             protected void set<T1, T2>(out BufferWrite<T1, T2> jri)
                 where T1 : struct, IBufferElementData 
                 where T2 : struct, IBufferElementData 
                 => jri = new BufferWrite<T1, T2>
-                {
-                    type1 = get_buffer_handle<T1>(true),
-                    type2 = get_buffer_handle<T2>(true),
-                };
+                (
+                    get_buffer_handle<T1>(true),
+                    get_buffer_handle<T2>(true)
+                );
 
             Dictionary<Type, ComponentSystemBase> _systems;
             Action run_lambda;
@@ -289,10 +289,10 @@ namespace Game.Mechanics
         }
 
         [Serializable]
-        public struct spawn_prefab
+        public readonly struct spawn_prefab
         {
-            public Entity prefab;
-            public float2 offset;
+            public readonly Entity prefab;
+            public readonly float2 offset;
 
             public spawn_prefab(Entity prefab, float2 offset)
             {

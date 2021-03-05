@@ -8,58 +8,82 @@ namespace Game.Mechanics
     {
         public static JobHandle merged_with(this JobHandle h1, JobHandle h2) => JobHandle.CombineDependencies(h1, h2);
 
-        #region Entity Input
+        #region Entity Read
         
-        public struct EntityRead
+        public readonly struct EntityRead
         {
-            [ReadOnly] public EntityTypeHandle type;
+            [ReadOnly] public readonly EntityTypeHandle type;
+            public EntityRead(EntityTypeHandle type) => this.type = type;
         }
         
         #endregion
         #region Read
 
-        public struct Read<T1>
+        public readonly struct Read<T1>
             where T1 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentTypeHandle<T1> type1;
+            [ReadOnly] public readonly ComponentTypeHandle<T1> type1;
+
+            public Read(ComponentTypeHandle<T1> type1) => this.type1 = type1;
         }
 
-        public struct Read<T1, T2>
+        public readonly struct Read<T1, T2>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
         {
-            [ReadOnly] public ComponentTypeHandle<T1> type1;
-            [ReadOnly] public ComponentTypeHandle<T2> type2;
+            [ReadOnly] public readonly ComponentTypeHandle<T1> type1;
+            [ReadOnly] public readonly ComponentTypeHandle<T2> type2;
+
+            public Read(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
         }
 
-        public struct Read<T1, T2, T3>
+        public readonly struct Read<T1, T2, T3>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
             where T3 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentTypeHandle<T1> type1;
-            [ReadOnly] public ComponentTypeHandle<T2> type2;
-            [ReadOnly] public ComponentTypeHandle<T3> type3;
+            [ReadOnly] public readonly ComponentTypeHandle<T1> type1;
+            [ReadOnly] public readonly ComponentTypeHandle<T2> type2;
+            [ReadOnly] public readonly ComponentTypeHandle<T3> type3;
+
+            public Read(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2, ComponentTypeHandle<T3> type3)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+                this.type3 = type3;
+            }
         }
 
-        public struct Read<T1, T2, T3, T4>
+        public readonly struct Read<T1, T2, T3, T4>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
             where T3 : struct, IComponentData 
             where T4 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentTypeHandle<T1> type1;
-            [ReadOnly] public ComponentTypeHandle<T2> type2;
-            [ReadOnly] public ComponentTypeHandle<T3> type3;
-            [ReadOnly] public ComponentTypeHandle<T4> type4;
+            [ReadOnly] public readonly ComponentTypeHandle<T1> type1;
+            [ReadOnly] public readonly ComponentTypeHandle<T2> type2;
+            [ReadOnly] public readonly ComponentTypeHandle<T3> type3;
+            [ReadOnly] public readonly ComponentTypeHandle<T4> type4;
+
+            public Read(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2, ComponentTypeHandle<T3> type3, ComponentTypeHandle<T4> type4)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+                this.type3 = type3;
+                this.type4 = type4;
+            }
         }
         
-        public struct Arrays<T1, T2>
+        public readonly struct Arrays<T1, T2>
             where T1 : struct 
             where T2 : struct
         {
-            [ReadOnly] public NativeArray<T1> arr1;
-            [ReadOnly] public NativeArray<T2> arr2;
+            [ReadOnly] public readonly NativeArray<T1> arr1;
+            [ReadOnly] public readonly NativeArray<T2> arr2;
 
             public Arrays(
                 NativeArray<T1> arr1, 
@@ -86,14 +110,14 @@ namespace Game.Mechanics
             }
         }
         
-        public struct Arrays<T1, T2, T3>
+        public readonly struct Arrays<T1, T2, T3>
             where T1 : struct 
             where T2 : struct
             where T3 : struct 
         {
-            [ReadOnly] public NativeArray<T1> arr1;
-            [ReadOnly] public NativeArray<T2> arr2;
-            [ReadOnly] public NativeArray<T3> arr3;
+            [ReadOnly] public readonly NativeArray<T1> arr1;
+            [ReadOnly] public readonly NativeArray<T2> arr2;
+            [ReadOnly] public readonly NativeArray<T3> arr3;
 
             public Arrays(
                 NativeArray<T1> arr1, 
@@ -129,16 +153,16 @@ namespace Game.Mechanics
             }
         }
         
-        public struct Arrays<T1, T2, T3, T4>
+        public readonly struct Arrays<T1, T2, T3, T4>
             where T1 : struct 
             where T2 : struct
             where T3 : struct 
             where T4 : struct 
         {
-            [ReadOnly] public NativeArray<T1> arr1;
-            [ReadOnly] public NativeArray<T2> arr2;
-            [ReadOnly] public NativeArray<T3> arr3;
-            [ReadOnly] public NativeArray<T4> arr4;
+            [ReadOnly] public readonly NativeArray<T1> arr1;
+            [ReadOnly] public readonly NativeArray<T2> arr2;
+            [ReadOnly] public readonly NativeArray<T3> arr3;
+            [ReadOnly] public readonly NativeArray<T4> arr4;
 
             public Arrays(
                 NativeArray<T1> arr1, 
@@ -248,20 +272,28 @@ namespace Game.Mechanics
         
         #region Global Read
 
-        public struct GlobalRead<T1>
+        public readonly struct GlobalRead<T1>
             where T1 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentDataFromEntity<T1> type;
+            [ReadOnly] public readonly ComponentDataFromEntity<T1> type;
+
+            public GlobalRead(ComponentDataFromEntity<T1> type) => this.type = type;
 
             public void Deconstruct(out ComponentDataFromEntity<T1> type1) => type1 = this.type;
         }
 
-        public struct GlobalRead<T1, T2>
+        public readonly struct GlobalRead<T1, T2>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
         {
-            [ReadOnly] public ComponentDataFromEntity<T1> type1;
-            [ReadOnly] public ComponentDataFromEntity<T2> type2;
+            [ReadOnly] public readonly ComponentDataFromEntity<T1> type1;
+            [ReadOnly] public readonly ComponentDataFromEntity<T2> type2;
+
+            public GlobalRead(ComponentDataFromEntity<T1> type1, ComponentDataFromEntity<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
 
             public void Deconstruct(out ComponentDataFromEntity<T1> type1, out ComponentDataFromEntity<T2> type2)
             {
@@ -270,14 +302,21 @@ namespace Game.Mechanics
             }
         }
 
-        public struct GlobalRead<T1, T2, T3>
+        public readonly struct GlobalRead<T1, T2, T3>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
             where T3 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentDataFromEntity<T1> type1;
-            [ReadOnly] public ComponentDataFromEntity<T2> type2;
-            [ReadOnly] public ComponentDataFromEntity<T3> type3;
+            [ReadOnly] public readonly ComponentDataFromEntity<T1> type1;
+            [ReadOnly] public readonly ComponentDataFromEntity<T2> type2;
+            [ReadOnly] public readonly ComponentDataFromEntity<T3> type3;
+
+            public GlobalRead(ComponentDataFromEntity<T1> type1, ComponentDataFromEntity<T2> type2, ComponentDataFromEntity<T3> type3)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+                this.type3 = type3;
+            }
 
             public void Deconstruct(
                 out ComponentDataFromEntity<T1> type1, 
@@ -291,16 +330,24 @@ namespace Game.Mechanics
             }
         }
 
-        public struct GlobalRead<T1, T2, T3, T4>
+        public readonly struct GlobalRead<T1, T2, T3, T4>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
             where T3 : struct, IComponentData 
             where T4 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentDataFromEntity<T1> type1;
-            [ReadOnly] public ComponentDataFromEntity<T2> type2;
-            [ReadOnly] public ComponentDataFromEntity<T3> type3;
-            [ReadOnly] public ComponentDataFromEntity<T4> type4;
+            [ReadOnly] public readonly ComponentDataFromEntity<T1> type1;
+            [ReadOnly] public readonly ComponentDataFromEntity<T2> type2;
+            [ReadOnly] public readonly ComponentDataFromEntity<T3> type3;
+            [ReadOnly] public readonly ComponentDataFromEntity<T4> type4;
+
+            public GlobalRead(ComponentDataFromEntity<T1> type1, ComponentDataFromEntity<T2> type2, ComponentDataFromEntity<T3> type3, ComponentDataFromEntity<T4> type4)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+                this.type3 = type3;
+                this.type4 = type4;
+            }
 
             public void Deconstruct(
                 out ComponentDataFromEntity<T1> type1, 
@@ -320,20 +367,28 @@ namespace Game.Mechanics
 
         #region Buffer Global Read
 
-        public struct BufferGlobalRead<T1>
+        public readonly struct BufferGlobalRead<T1>
             where T1 : struct, IBufferElementData 
         {
-            [ReadOnly] public BufferFromEntity<T1> type;
+            [ReadOnly] public readonly BufferFromEntity<T1> type;
+
+            public BufferGlobalRead(BufferFromEntity<T1> type) => this.type = type;
 
             public void Deconstruct(out BufferFromEntity<T1> type1) => type1 = this.type;
         }
 
-        public struct BufferGlobalRead<T1, T2>
+        public readonly struct BufferGlobalRead<T1, T2>
             where T1 : struct, IBufferElementData 
             where T2 : struct, IBufferElementData
         {
-            [ReadOnly] public BufferFromEntity<T1> type1;
-            [ReadOnly] public BufferFromEntity<T2> type2;
+            [ReadOnly] public readonly BufferFromEntity<T1> type1;
+            [ReadOnly] public readonly BufferFromEntity<T2> type2;
+
+            public BufferGlobalRead(BufferFromEntity<T1> type1, BufferFromEntity<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
 
             public void Deconstruct(out BufferFromEntity<T1> type1, out BufferFromEntity<T2> type2)
             {
@@ -346,20 +401,31 @@ namespace Game.Mechanics
         
         #region Buffer Global Write
 
-        public struct BufferGlobalWrite<T1>
+        public readonly struct BufferGlobalWrite<T1>
             where T1 : struct, IBufferElementData 
         {
-            public BufferFromEntity<T1> type;
+            public readonly BufferFromEntity<T1> type;
+
+            public BufferGlobalWrite(BufferFromEntity<T1> type)
+            {
+                this.type = type;
+            }
 
             public void Deconstruct(out BufferFromEntity<T1> type1) => type1 = this.type;
         }
 
-        public struct BufferGlobalWrite<T1, T2>
+        public readonly struct BufferGlobalWrite<T1, T2>
             where T1 : struct, IBufferElementData 
             where T2 : struct, IBufferElementData
         {
-            public BufferFromEntity<T1> type1;
-            public BufferFromEntity<T2> type2;
+            public readonly BufferFromEntity<T1> type1;
+            public readonly BufferFromEntity<T2> type2;
+
+            public BufferGlobalWrite(BufferFromEntity<T1> type1, BufferFromEntity<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
 
             public void Deconstruct(out BufferFromEntity<T1> type1, out BufferFromEntity<T2> type2)
             {
@@ -372,18 +438,29 @@ namespace Game.Mechanics
         
         #region Optional Input
 
-        public struct Optional<T1>
+        public readonly struct Optional<T1>
             where T1 : struct, IComponentData 
         {
-            [ReadOnly] public ComponentTypeHandle<T1> type1;
+            [ReadOnly] public readonly ComponentTypeHandle<T1> type1;
+
+            public Optional(ComponentTypeHandle<T1> type1)
+            {
+                this.type1 = type1;
+            }
         }
 
-        public struct Optional<T1, T2>
+        public readonly struct Optional<T1, T2>
             where T1 : struct, IComponentData 
             where T2 : struct, IComponentData
         {
-            [ReadOnly] public ComponentTypeHandle<T1> type1;
-            [ReadOnly] public ComponentTypeHandle<T2> type2;
+            [ReadOnly] public readonly ComponentTypeHandle<T1> type1;
+            [ReadOnly] public readonly ComponentTypeHandle<T2> type2;
+
+            public Optional(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
         }
         
         public static bool has<T1>(
@@ -430,6 +507,11 @@ namespace Game.Mechanics
             where T1 : struct, IComponentData 
         {
             public ComponentTypeHandle<T1> type1;
+
+            public Write(ComponentTypeHandle<T1> type1)
+            {
+                this.type1 = type1;
+            }
         }
 
         public struct Write<T1, T2>
@@ -438,6 +520,12 @@ namespace Game.Mechanics
         {
             public ComponentTypeHandle<T1> type1;
             public ComponentTypeHandle<T2> type2;
+
+            public Write(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
         }
 
         public struct Write<T1, T2, T3>
@@ -448,6 +536,13 @@ namespace Game.Mechanics
             public ComponentTypeHandle<T1> type1;
             public ComponentTypeHandle<T2> type2;
             public ComponentTypeHandle<T3> type3;
+
+            public Write(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2, ComponentTypeHandle<T3> type3)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+                this.type3 = type3;
+            }
         }
 
         public struct Write<T1, T2, T3, T4>
@@ -460,6 +555,14 @@ namespace Game.Mechanics
             public ComponentTypeHandle<T2> type2;
             public ComponentTypeHandle<T3> type3;
             public ComponentTypeHandle<T4> type4;
+
+            public Write(ComponentTypeHandle<T1> type1, ComponentTypeHandle<T2> type2, ComponentTypeHandle<T3> type3, ComponentTypeHandle<T4> type4)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+                this.type3 = type3;
+                this.type4 = type4;
+            }
         }
         
         public static NativeArray<T1> get_data_of<T1>(
@@ -527,6 +630,11 @@ namespace Game.Mechanics
             where T1 : struct, IBufferElementData 
         {
             public BufferTypeHandle<T1> type1;
+
+            public BufferWrite(BufferTypeHandle<T1> type1)
+            {
+                this.type1 = type1;
+            }
         }
 
         public struct BufferWrite<T1, T2>
@@ -535,6 +643,12 @@ namespace Game.Mechanics
         {
             public BufferTypeHandle<T1> type1;
             public BufferTypeHandle<T2> type2;
+
+            public BufferWrite(BufferTypeHandle<T1> type1, BufferTypeHandle<T2> type2)
+            {
+                this.type1 = type1;
+                this.type2 = type2;
+            }
         }
         
         public static BufferAccessor<T1> get_data_of<T1>(

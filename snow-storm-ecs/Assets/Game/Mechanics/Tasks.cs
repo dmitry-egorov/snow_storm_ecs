@@ -50,9 +50,9 @@ namespace Game.Mechanics
          * [assembly: RegisterGenericJobType(typeof(assign_task<gathers_target>.job ))]
          *
          * [Serializable]
-         * public struct gathers_target: ITask
+         * public readonly struct gathers_target: ITask
          * {
-         *     public Entity target; 
+         *     public readonly Entity target; 
          * }
          * 
          * public class assign_gathers_target: assign_task<gathers_target> { }

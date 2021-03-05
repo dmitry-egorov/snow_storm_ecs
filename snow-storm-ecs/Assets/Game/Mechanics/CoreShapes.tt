@@ -1,0 +1,151 @@
+<#@ template language="C#" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using System;
+
+namespace Game.Mechanics
+{
+    public static class CoreShapes
+    {
+ <#
+    var max_params_count = 6;
+    for (var params_count_i = 2; params_count_i <= max_params_count; params_count_i++)
+    {
+        var params_list_st = string.Join(", ", Enumerable.Range(1, params_count_i).Select(i => $"T{i}"));
+#>
+        [Serializable]
+        public readonly struct s<<#= params_list_st #>>
+        {
+<#
+        // fields
+        for (var i = 1; i <= params_count_i; i++)
+        {
+#>
+            readonly T<#= i #> _<#= i #>; 
+<#
+        }
+#>
+
+<#
+        // accessors
+        for (var i = 1; i <= params_count_i; i++)
+        {
+#>
+            public T<#=i#> c<#=i#><T>() where T:T<#=i#> => _<#=i#>; 
+<#
+        }
+#>
+
+<#
+        // constructor
+        var constructor_params = string.Join(", ", Enumerable.Range(1, params_count_i).Select(i => $"T{i} _{i}"));
+#>
+            public s(<#= constructor_params #>)
+            {
+<#
+        for (var i = 1; i <= params_count_i; i++)
+        {
+#>
+                this._<#=i#> = _<#=i#>;
+<#
+        }
+#>
+            }
+
+<#
+        // deconstructor
+        var deconstructor_params = string.Join(", ", Enumerable.Range(1, params_count_i).Select(i => $"out T{i} _{i}"));
+#>
+            public void Deconstruct(<#= deconstructor_params #>)
+            {
+<#
+        for (var i = 1; i <= params_count_i; i++)
+        {
+#>
+                _<#=i#> = this._<#=i#>;
+<#
+        }
+#>
+            }
+
+<#
+        // implicit value cast operators
+        for (var i = 1; i <= params_count_i; i++)
+        {
+#>
+            public static implicit operator T<#=i#>(s<<#=params_list_st#>> e) => e._<#=i#>;
+<#
+        }
+#>
+
+<#
+        // implicit cast operators
+        var elements = Enumerable.Range(1, params_count_i).ToList();
+        for (var out_length_i = 2; out_length_i <= params_count_i; out_length_i++)
+        {
+            var combs = combinations(out_length_i, elements);
+            if (out_length_i == params_count_i)
+                combs = combs.Skip(1);
+            
+            foreach (var comb in combs)
+            {
+                var out_params_list = string.Join(", ", comb.Select(i => $"T{i}"));
+                var argument_list =   string.Join(", ", comb.Select(i => $"e._{i}"));
+#>
+            public static implicit operator s<<#=out_params_list#>>(s<<#=params_list_st#>> e) => shape(<#=argument_list#>);
+<#   
+            } 
+#>
+
+<#
+        }
+#>
+        }
+
+<#
+    }
+    
+    
+    for (var params_count_i = 2; params_count_i <= max_params_count; params_count_i++)
+    {
+        var g_params_list_st = string.Join(", ", Enumerable.Range(1, params_count_i).Select(i => $"T{i}"));
+        var arg_list_st = string.Join(", ", Enumerable.Range(1, params_count_i).Select(i => $"T{i} _{i}"));
+        var params_list_st = string.Join(", ", Enumerable.Range(1, params_count_i).Select(i => $"_{i}"));
+
+#>
+        public static s<<#=g_params_list_st#>> shape<<#=g_params_list_st#>>(<#=arg_list_st#>) => new s<<#=g_params_list_st#>>(<#=params_list_st#>);
+<#
+    }
+
+
+    IEnumerable<int[]> combinations(int length, List<int> available)
+    {
+        if (length == 0)
+            yield break;
+        
+        if (length == 1)
+        {
+            for (var i = 0; i < available.Count; i++)
+            {
+                yield return new[] {available[i]};
+            }
+            
+            yield break;
+        }
+        
+        for (var i = 0; i < available.Count; i++)
+        {
+            var selected = available[i];
+            available.RemoveAt(i);
+            foreach (var comb in combinations(length - 1, available))
+            {
+                yield return Enumerable.Repeat(selected, 1).Concat(comb).ToArray();    
+            }
+            available.Insert(i, selected);
+        }
+    }
+#>
+    }
+}

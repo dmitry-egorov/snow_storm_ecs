@@ -27,24 +27,24 @@ namespace Game.Mechanics
     public static class Gathering
     {
         [Serializable]
-        public struct gathers_resources: ITask
+        public readonly struct gathers_resources: ITask
         {
-            public Entity storage;
+            public readonly Entity storage;
             public gathers_resources(Entity storage) => this.storage = storage;
         }
         
         [Serializable]
-        public struct finds_and_gathers_a_resource: ITask
+        public readonly struct finds_and_gathers_a_resource: ITask
         {
-            public Entity storage;
+            public readonly Entity storage;
             public finds_and_gathers_a_resource(Entity storage) => this.storage = storage;
         }
         
         [Serializable]
-        public struct gathers_target: ITask
+        public readonly struct gathers_target: ITask
         {
-            public Entity target; 
-            public Entity storage;
+            public readonly Entity target; 
+            public readonly Entity storage;
 
             public gathers_target(Entity target, Entity storage)
             {
@@ -60,9 +60,9 @@ namespace Game.Mechanics
         }
 
         [Serializable]
-        public struct finds_and_picks_up_a_resource: ITask
+        public readonly struct finds_and_picks_up_a_resource: ITask
         {
-            public int type; // Temporary field
+            public readonly int type; // Temporary field
         }
         
         //------------------------------------------------------------

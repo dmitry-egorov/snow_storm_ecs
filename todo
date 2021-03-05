@@ -1,7 +1,4 @@
 Todo:
-- git
-- task execution on a separate entity? (maybe the one where it is referenced on stack)
-  - can store prev_task and fallback_task and traverse the tasks without a stack
 - Entities.Foreach needs task components query?
 - how to combine task context in batch jobs?
 - finish_with and fail_with when pushing tasks, task execution context
@@ -18,6 +15,10 @@ Todo:
 - specify time remaining when setting the location directly to correctly interpolate stopping
   - remove time remaining when assigning prev_location
 - wind up time for actions
+- task execution on a separate entity? (maybe the one where it is referenced on stack)
+  - can store prev_task and fallback_task and traverse the tasks without a stack
++ git
++ T4 templates and generate shapes
 
 Later:
 - storage capacity

@@ -2,7 +2,7 @@ namespace Game.Mechanics
 {
     public static class CoreIndex
     {
-        public struct index
+        public readonly struct index
         {
             public readonly int i;
 

@@ -6,7 +6,7 @@ namespace Game.Mechanics
 {
     public static class Times
     {
-        public const float simulation_timestep = 1f/60f;// / 20f;
+        public const float simulation_timestep = 1f / 60f;// / 20f;
 
         [Serializable]
         public readonly struct simulation_elapsed_time: IComponentData

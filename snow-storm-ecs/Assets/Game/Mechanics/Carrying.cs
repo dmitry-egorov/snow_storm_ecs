@@ -20,13 +20,13 @@ namespace Game.Mechanics
     public static class Carrying
     {
         [Serializable]
-        public struct can_carry : IComponentData
+        public readonly struct can_carry : IComponentData
         {
-            public int max_weight;
-            public uint pickup_cooldown;
-            public float pickup_reach;
-            public uint drop_off_cooldown;
-            public float drop_off_reach;
+            public readonly int max_weight;
+            public readonly uint pickup_cooldown;
+            public readonly float pickup_reach;
+            public readonly uint drop_off_cooldown;
+            public readonly float drop_off_reach;
 
             public can_carry(int max_weight, uint pickup_cooldown, float pickup_reach, uint drop_off_cooldown, float drop_off_reach)
             {
@@ -91,6 +91,8 @@ namespace Game.Mechanics
                 var global = get_global<in_space, can_be_carried, carried_by>();
                 var context = get_task_context();
 
+                fail_all_tasks_of(fail_query);
+
                 Entities.WithNone<acting_on_cooldown>()
                 .WithReadOnly(global)
                 .ForEach((int entityInQueryIndex
@@ -118,8 +120,6 @@ namespace Game.Mechanics
                         context.fail_task(sort_key, self);
                     }
                 }).ScheduleParallel();
-
-                fail_all_tasks_of(fail_query);
             }
         }
 

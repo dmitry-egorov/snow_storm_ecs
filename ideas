@@ -28,6 +28,11 @@ local path finding:
   * upgrade the engine
   * find people/heroes
   * build bridges/other structures
+* wounds
+	* regeneration is applied to all wounds equaly
+	* a wound is removed when its regeneration_required is 0
+	* all wounds apply their damage
+	* the damage is changed while the wound is healed
   
 ai:
 * volunteer for jobs, when nothing to do.
