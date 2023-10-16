@@ -1,6 +1,0 @@
-[209/455    0s] CopyTool ../../Builds/tiny3d-mac-dotnet/Data/catalog.bin
-[210/455    0s] CopyTool ../../Builds/tiny3d-mac-dotnet/Data/SubScenes/46b433b264c69cbd39f04ad2e5d12be8.entityheader
-[211/455    0s] CopyTool ../../Builds/tiny3d-mac-dotnet/Data/SubScenes/1b436f617d6d3bb49aba65ff9f2581c7.0.entities
-[214/455    0s] CopyTool ../../Builds/tiny3d-mac-dotnet/Data/SubScenes/1b436f617d6d3bb49aba65ff9f2581c7.entityheader
-[218/455    0s] CopyTool ../../Builds/tiny3d-mac-dotnet/Data/SubScenes/46b433b264c69cbd39f04ad2e5d12be8.0.entities
-*** Bee build success (0.22 seconds), 5 items updated, 476 evaluated

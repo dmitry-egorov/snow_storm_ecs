@@ -1,3 +1,0 @@
-tundra: error: unable to map tiny3d-win-dotnet to any named node or input/output file
-maybe you meant:
-- tiny3d-mac-dotnet
